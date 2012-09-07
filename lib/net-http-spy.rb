@@ -1,16 +1,22 @@
 require 'net/https'
 require 'logger'
 require 'cgi'
+require 'rails'
 
 # HTTP SPY
 module Net
   class HTTP
+
     alias :old_initialize :initialize
     alias :old_request :request
 
     class << self
       attr_accessor :http_logger
       attr_accessor :http_logger_options
+    end
+
+    def logger
+      self.class.http_logger
     end
 
     def initialize(*args, &block)
@@ -20,33 +26,38 @@ module Net
       @logger_options = defaults.merge(self.class.http_logger_options)
       @params_limit = @logger_options[:params_limit] || @logger_options[:limit]
       @body_limit   = @logger_options[:body_limit]   || @logger_options[:limit]
-      
-      self.class.http_logger.info "CONNECT: #{args.inspect}" if !@logger_options[:verbose]
 
       old_initialize(*args, &block)
       @debug_output   = self.class.http_logger if @logger_options[:verbose]
     end
 
-
     def request(*args, &block)
-      unless started? || @logger_options[:verbose]
-        req = args[0].class::METHOD
-        self.class.http_logger.info "#{req} #{args[0].path}"
-      end
-
-      result = old_request(*args, &block)
-      unless started? || @logger_options[:verbose]
-
-        self.class.http_logger.info "PARAMS #{CGI.parse(args[0].body).inspect[0..@params_limit]} " if args[0].body && req != 'CONNECT'
-        self.class.http_logger.info "TRACE: #{caller.reverse}" if @logger_options[:trace]
-        self.class.http_logger.info "BODY: #{(@logger_options[:body] ? result.body : result.class.name)[0..@body_limit]}"
+      result = nil
+      req = args[0].class::METHOD
+      payload = {
+          address: self.address,
+          port: self.port,
+          path: args[0].path,
+      }
+      ActiveSupport::Notifications.instrument("#{req.downcase}.httpspy", payload) do
+        result = old_request(*args, &block)
+        payload[:code] = result.code
+        payload[:content_length] = result.body.bytesize
       end
       result
     end
-
-
   end
-
 end
 
-Net::HTTP.http_logger = Logger.new(STDOUT)
+module HttpInstrumentation
+  class LogSubscriber < ActiveSupport::LogSubscriber
+    def get(event)
+      name = '%s (%.1fms)' % ["HTTP GET", event.duration]
+      # produces: 'query: "foo" OR "bar", rows: 3, ...'
+      query = event.payload.map{ |k, v| "#{k}: #{color(v, BOLD, true)}" }.join(', ')
+      debug "  #{color(name, YELLOW, true)}  [ #{query} ]"
+    end
+  end
+end
+
+HttpInstrumentation::LogSubscriber.attach_to :httpspy

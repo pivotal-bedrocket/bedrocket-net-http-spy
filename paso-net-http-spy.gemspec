@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Martin Sadler", "Patrik Soderberg"]
+  s.authors = ["Patrik Soderberg", "Martin Sadler"]
   s.date = "2012-09-07"
   s.description = "Ever wondered what HTTP requests the Ruby gem you are using to connect to a third party API is making? Use HTTP Spy to see what is going on behind the scenes."
   s.email = "patrik@booli.se"
@@ -25,7 +25,7 @@ Gem::Specification.new do |s|
     "examples/twitter-withbody.rb",
     "readme.markdown"
   ]
-  s.homepage = "http://github.com/martinbtt/net-http-spy"
+  s.homepage = "http://github.com/Paso/net-http-spy"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.23"
   s.summary = "Ever wondered what HTTP requests the Ruby gem you are using to connect to a third party API is making? Use HTTP Spy to see what is going on behind the scenes."
