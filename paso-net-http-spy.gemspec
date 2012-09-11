@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.version = "0.2.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Patrik Soderberg", "Martin Sadler"]
-  s.date = "2012-09-07"
+  s.authors = ["Martin Sadler", "Patrik Soderberg"]
+  s.date = "2012-09-11"
   s.description = "Ever wondered what HTTP requests the Ruby gem you are using to connect to a third party API is making? Use HTTP Spy to see what is going on behind the scenes."
   s.email = "patrik@booli.se"
   s.extra_rdoc_files = [
@@ -34,9 +34,12 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<paso-net-http-spy>, [">= 0"])
     else
+      s.add_dependency(%q<paso-net-http-spy>, [">= 0"])
     end
   else
+    s.add_dependency(%q<paso-net-http-spy>, [">= 0"])
   end
 end
 
