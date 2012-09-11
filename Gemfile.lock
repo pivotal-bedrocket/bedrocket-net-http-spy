@@ -1,0 +1,14 @@
+PATH
+  remote: .
+  specs:
+    paso-net-http-spy (0.2.1)
+
+GEM
+  remote: http://www.rubygems.org/
+  specs:
+
+PLATFORMS
+  x86-mingw32
+
+DEPENDENCIES
+  paso-net-http-spy!

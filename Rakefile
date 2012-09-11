@@ -27,8 +27,3 @@ Rake::RDocTask.new do |rd|
   rd.rdoc_files.include("readme.markdown", "lib/**/*.rb")
   rd.rdoc_dir = "rdoc"
 end
-
-desc 'Clear out RDoc and generated packages'
-task :clean => [:clobber_rdoc, :clobber_package] do
-  rm "#{spec.name}.gemspec"
-end
