@@ -8,6 +8,7 @@ require 'mechanize'
 require 'webmock/rspec'
 include WebMock
 
+
 LIVE = ENV['LIVE']
 WebMock.allow_net_connect! if LIVE
 

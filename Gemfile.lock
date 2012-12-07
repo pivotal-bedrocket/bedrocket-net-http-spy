@@ -1,14 +1,16 @@
 PATH
   remote: .
   specs:
-    paso-net-http-spy (0.2.1)
+    bedrocket-net-http-spy (0.2.1)
+      bedrocket-net-http-spy
 
 GEM
   remote: http://www.rubygems.org/
   specs:
 
 PLATFORMS
+  ruby
   x86-mingw32
 
 DEPENDENCIES
-  paso-net-http-spy!
+  bedrocket-net-http-spy!
