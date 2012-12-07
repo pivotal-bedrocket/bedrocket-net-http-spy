@@ -6,13 +6,13 @@ require 'rspec/core/rake_task'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gemspec|
-    gemspec.name = "paso-net-http-spy"
+    gemspec.name = "bedrocket-net-http-spy"
     gemspec.summary = "Ever wondered what HTTP requests the Ruby gem you are using to connect to a third party API is making? Use HTTP Spy to see what is going on behind the scenes."
-    gemspec.email = "patrik@booli.se"
-    gemspec.homepage = "http://github.com/Paso/net-http-spy"
+    gemspec.email = "bedrocket-network-a-dev@googlegroups.com"
+    gemspec.homepage = "http://github.com/pivotal-bedrocket/net-http-spy"
     gemspec.description = "Ever wondered what HTTP requests the Ruby gem you are using to connect to a third party API is making? Use HTTP Spy to see what is going on behind the scenes."
-    gemspec.authors = ["Martin Sadler", "Patrik Soderberg"]
-    gemspec.files.include Dir["examples/*.rb"] + ["readme.markdown"]
+    gemspec.authors = ["Martin Sadler", "Patrik Soderberg", "Mik Freedman"]
+    gemspec.files.include Dir["**/**"]
   end
 rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
