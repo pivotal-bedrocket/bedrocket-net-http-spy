@@ -15,17 +15,8 @@ Gem::Specification.new do |s|
   s.extra_rdoc_files = [
     "readme.markdown"
   ]
-  s.files = [
-    "examples/fogbugz.rb",
-    "examples/google.rb",
-    "examples/twitter-calltrace.rb",
-    "examples/twitter-customlog.rb",
-    "examples/twitter-simple.rb",
-    "examples/twitter-verbose.rb",
-    "examples/twitter-withbody.rb",
-    "readme.markdown"
-  ]
-  s.homepage = "http://github.com/Paso/net-http-spy"
+  s.files         = `git ls-files`.split("\n")
+  s.homepage = "http://github.com/pivotal-bedrocket/net-http-spy"
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.23"
   s.summary = "Ever wondered what HTTP requests the Ruby gem you are using to connect to a third party API is making? Use HTTP Spy to see what is going on behind the scenes."
